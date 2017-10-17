@@ -1,13 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+//use App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Post;
 use App\Comment;
+use Auth;
 
 class PostsController extends Controller
 {
+
+    public function __construct () {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index(){
         $posts = Post::latest()->get();
         return view('posts.index', compact('posts'));
@@ -31,7 +38,8 @@ class PostsController extends Controller
         #create a new post using request data and save it to the database
         Post::create([
             'title' => $request->title,
-            'body' => $request->body
+            'body' => $request->body,
+            'user_id' => Auth::user()->id
         ]);
         #redirect to the homepage
         return redirect('/posts');

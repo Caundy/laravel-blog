@@ -17,9 +17,30 @@
             <li class="nav-item">
               <a class="nav-link" href="/posts/create">New post!</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
+            @if(!Auth::check())
+                <li class="nav-item ml-auto">
+                  <a class="nav-link" href="/login" style="color: dodgerblue">
+                      Log in!
+                  </a>
+                </li>
+                <li class="nav-item ml-auto">
+                  <a class="nav-link" href="/register" style="color: dodgerblue">
+                      Register
+                  </a>
+                </li>
+            @endif
+            @if(Auth::check())
+                <li class="nav-item ml-auto">
+                  <a class="nav-link" href="contact.html" style="color: green">
+                      {{ Auth::user()->name }}
+                  </a>
+                </li>
+                <li class="nav-item ml-auto">
+                  <a class="nav-link" href="/logout" style="color: dodgerblue">
+                      Log out!
+                  </a>
+                </li>
+            @endif
           </ul>
         </div>
       </div>

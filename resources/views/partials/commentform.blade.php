@@ -1,6 +1,6 @@
 <h3>Leave a comment:</h3>
 <br>
-<form method="POST" action="/comments">
+<form method="POST" action="/posts/{{$post->id}}/comments">
     {{ csrf_field() }}
 
     <div class="form-group">

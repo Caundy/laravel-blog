@@ -4,27 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use App\Post;
 
 class CommentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function __construct () {
+        $this->middleware('auth');
     }
 
     /**
@@ -33,19 +19,15 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Post $post)
     {
-        $this->validate($request, [
+        $this->validate(request(), [
             'post_id' => 'required',
             'body' => 'required|min:2|max:50'
         ]);
+        $post->addComment(request('body'));
 
-        Comment::create([
-            'post_id' => $request->post_id,
-            'body' => $request->body
-        ]);
-
-        return redirect('/posts/'.$request->post_id);
+        return back();
     }
 
     /**

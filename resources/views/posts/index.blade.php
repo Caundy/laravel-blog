@@ -13,7 +13,10 @@
             {{$post->body}}
         </h3>
 
-        <p class="post-meta">Posted by Caundy at {{ $post->created_at->diffForHumans() }}</p>
+        <p class="post-meta">
+        Posted by 
+        {{ $post->user->name }} 
+        {{ $post->created_at->diffForHumans() }}</p>
         </div>
             <hr>
     @endforeach

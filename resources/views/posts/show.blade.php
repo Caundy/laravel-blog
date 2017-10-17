@@ -13,9 +13,14 @@
             <p>
                 {{ $post->body }}
             </p>
+            <hr>
+                <h3>Comments:</h3>
                 <ul>
                     @foreach($post->comments as $comment)
-                        <li>
+                        <li style="list-style-type: none">
+                            <strong>
+                                {{ $comment->user->name }}:
+                            </strong>
                             {{ $comment->body }}
                         </li>
                     @endforeach
@@ -24,7 +29,7 @@
         </div>
       </div>
     </article>
-
+    <br><br>
     <!-- comment form -->
     @include('partials.commentform')
 

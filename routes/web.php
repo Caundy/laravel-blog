@@ -12,7 +12,16 @@
 */
 
 #root
-Route::get('/', 'PostsController@index');
+Route::get('/', 'PostsController@index')->name('home');
+Route::get('/home', 'PostsController@index');
+#register/log in
+Route::get('/register', 'RegistrationController@create');
+Route::post('/register', 'RegistrationController@store');
+
+Route::get('/login', 'SessionsController@create')->name('login');
+Route::get('/logout', 'SessionsController@destroy');
+Route::post('/sessions', 'SessionsController@store');
+
 
 #get ALL posts
 Route::get('/posts', 'PostsController@index');
@@ -25,5 +34,5 @@ Route::post('/posts', 'PostsController@store');
 Route::get('/posts/{post}', 'PostsController@show');
 
 #COMMENTS ROUTES
-Route::post('/comments', 'CommentsController@store');
+Route::post('/posts/{post}/comments', 'CommentsController@store');
 
